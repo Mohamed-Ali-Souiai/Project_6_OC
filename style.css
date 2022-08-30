@@ -1,0 +1,500 @@
+
+/* fonts */
+@font-face {
+    font-family: 'tigreal_freeoutline';
+    src: url('fonts/tigreal_outline-webfont.woff2') format('woff2'),
+         url('fonts/tigreal_outline-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tigreal_freeoutline';
+    src: url('fonts/tigreal_outline-webfont.woff2') format('woff2'),
+         url('fonts/tigreal_outline-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tigreal_freerough';
+    src: url('fonts/tigreal_rough-webfont.woff2') format('woff2'),
+         url('fonts/tigreal_rough-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* General */
+
+body
+{
+    font-family:'tigreal_freeoutline' ;
+    background-color: #2a2a2a;
+    color: #f6eeee;
+}
+
+#bodyPage
+{
+    margin: auto;
+}
+
+h2
+{
+    font-family: 'tigreal_freeoutline';
+    color:  rgb(244, 229, 192);
+    font-size: 3em;
+    text-shadow: 2px 2px 0.5px rgb(0, 0, 0);
+}
+
+/* Header block */
+header
+{
+
+    display: flex;
+    background-color: rgb(197, 194, 145);
+    height: 225px; 
+    align-items: center;
+    border-radius: 50px;
+    justify-content: space-between;
+}
+
+.logo
+{
+    margin-left: 50px;
+}
+.logo img
+{
+    width: 9em;
+    height: 9em;
+}
+
+header nav a
+{
+    text-decoration: none;
+    margin-right: 20px;
+    color: #000000;
+    margin-right:50px;  
+}
+
+header nav a:hover
+{
+    color: #ffffff
+}
+
+
+header nav ul
+{
+    font-family: tigreal_freeoutline;
+    /*display: -webkit-box;
+    display: -ms-flexbox;*/
+    display: flex;
+    margin-top: 0em;
+    font-size: 2em;
+    color: #181818;
+    margin-right: 10px;
+    padding-top: 20px;
+   
+}   
+
+header nav ul li
+{
+    list-style-type: none;    
+    
+}
+
+/* Best film */
+#bestFilm
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3em;
+}
+
+#bestFilm h2
+{
+    margin-top: 1px;
+    margin-bottom: 3px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 4em;
+    text-shadow: 3px 3px 1px rgb(0, 0, 0);
+}
+
+#bestFilmImage
+{
+    margin-bottom: 30px;
+}
+
+#bestFilmTitle
+{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 100px;
+    text-shadow: 5px 5px 2px rgb(0, 0, 0);
+    text-align: center;
+    
+}
+
+#bestFilm_info
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1px;
+    width: 40%;
+}
+
+#bestFilmDescription
+{
+    max-width: 80%;
+    text-align: center;
+}
+
+#bestFilmBtn
+{
+    height: 50px;
+    background-color:  rgb(95, 95, 95);
+    border-radius: 5px;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 3px 8px 0px 8px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+/* Modal window*/
+.modal 
+{
+    display: none; 
+    position: fixed; 
+    z-index: 3; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);  
+}
+  
+.modalContent
+{
+    display: flex;
+    opacity: 90%;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: black;
+    border-radius: 50px;
+    justify-content: space-around;
+}
+
+.infoModalText__infoText
+{
+    text-align: center;
+    margin-left: 20px;
+}
+
+#headerModal
+{
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    font-size: 2em;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+    background-color: rgb(85, 75, 75);
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#headerModalTitle
+{
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 3px 3px 1px rgb(0, 0, 0);
+}
+
+#headerModalImage img
+{
+    width: 250px;
+    height: 350px;
+}
+
+#infoModalText
+{
+    display: flex;     
+    flex-direction: column;
+    width: 65%;
+    margin-left: 30px;
+}
+
+.infoModalText__info
+{
+    
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 30px;
+}
+
+.infoModalText__titleInfo
+{
+    font-weight: bold;
+}
+
+#infoModalActors
+{
+    text-align: start;
+}
+
+
+#infoModalDescription
+{
+    text-align: justify;
+}
+
+.modalContentClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #9B9B9B;
+    font-size: 18px;
+}
+  
+.modalContentClose:hover, .modalContentClose:focus
+{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Categories */
+.category
+{
+
+    flex-direction: column;
+    align-items:center; 
+    display: flex; 
+    background-color: rgb(169, 168, 157);
+    border-radius: 50px;
+    margin-top: 0.3em;
+    height: 400px;
+}
+
+.category h2
+{
+   margin-top: 1px;
+   margin-bottom: 30px;
+}
+
+/* Slides */
+.previous, .next
+{
+    cursor: pointer;
+    visibility: visible;
+    font-size: 50px;
+    transition: opacity 0.3s ease;
+    opacity: 0.3;
+    color: rgba(220, 220, 220, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 40px;
+    height: 270px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.previous
+{
+    left: 30px;
+    margin-right: 10px;
+}
+
+.next
+{
+    right: 30px;
+}
+
+.previous:hover, .next:hover 
+{
+    opacity: 1;
+}
+
+.list
+{
+    align-items: center;
+    /*background-color:#c6cfcf ;*/
+    display: flex;
+    height: 600px;
+    justify-content: center;
+}
+
+.category_slide
+{
+    margin-right: 10px;
+}
+
+.category_slide img
+{
+
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    transition: .5s ease;
+    /*width: 240px;*/
+}
+
+.category_slide img:hover
+{
+	transform: scale(1.3);
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.CategoryTitle
+{
+    font-size: 12px;
+}
+
+
+/* Responsive */
+@media screen and (max-width: 980px)
+{
+    /* Header block */
+    header nav a
+    {
+        margin-bottom: 20px;
+    }
+
+    header nav ul
+    {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: normal;
+        font-size: 1.5em;
+    } 
+
+    /* Best film */
+    #bestFilm
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #bestFilmImage
+    {
+        margin-bottom: 1px;
+    }
+
+    #bestFilmImage img
+    {
+        border-radius: 10px;
+    }
+    
+
+    #bestFilmTitle
+    {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    
+    
+    #bestFilm_info
+    {
+        margin-top: 30px;
+        width: 100%;
+    }
+    
+    #bestFilmDescription
+    {
+        max-width: 100%;
+    }
+    
+    /* Modal window */
+
+    .modalContent
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+    }
+
+    #headerModal
+    {
+        width: 100%;
+    }
+
+    #headerModalTitle
+    {
+        margin-top: 30px;
+    }
+
+    #infoModalText
+    {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    /*categories */
+
+    .category h2
+    {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    /*slides*/
+    .list
+    {
+        margin-top: 0px;
+        height: 420px;
+        border-radius: 10px;
+    }
+
+    .category_slide4 
+    {
+        display: none; 
+    }
+
+    .previous, .next
+    {
+        position: absolute;
+    }
+
+    .previous
+    {
+        left: 0px;
+    }
+
+    .next
+    {
+        right: 0px;
+    }
+
+    .category_slide img:hover
+    {
+        transform: scale(1.1);
+    }
+}
+
