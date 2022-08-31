@@ -110,7 +110,7 @@ function makeCategory(category){
   divSlider.appendChild(spanControlPrev);
 
   //Create and insert slides blocks and preview arrow into slide block  
-  for (let i=1; i<5; i++){
+  for (let i=1; i<6; i++){
     let spanSlide = document.createElement("span");
     spanSlide.setAttribute("id", "slide" + i + idSection);
     spanSlide.setAttribute("class", "category_slide category_slide" + i);
