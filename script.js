@@ -16,13 +16,17 @@ function loadResults(url, functionUrl) {
 let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
-  bestFilmUrl = result.results[0].url;   
-  loadResults(bestFilmUrl, bestFilmResultMainPage);
-}
-function bestFilmResultMainPage(result){
-  document.getElementById("bestFilmImage").innerHTML = "<img src=" + result.image_url + "alt='Best Film Image' height='400' width='300'/>";
-  document.getElementById("bestFilmTitle").innerHTML = result.original_title;
-  document.getElementById("bestFilmDescription").innerHTML = result.description;
+  bestFilmUrl = result.results[0].url;
+  console.log('top')
+  console.log(result) 
+  document.getElementById("bestFilmImage").innerHTML = `<img src=${result["results"][0]["image_url"]} + alt='Best Film Image' height='400' width='300'/>`;
+  document.getElementById("bestFilmTitle").innerHTML = result["results"][0]["title"];
+  let description = document.getElementById("bestFilmDescription");
+  fetch(result["results"][0]["url"])
+    .then(response => response.json())
+    .then(data => {
+      description.innerHTML = data["description"];
+    }) 
 }
 loadResults(bestFilmUrlList, bestFilmUrlFunc);
 let btn = document.getElementById("bestFilmBtn");
