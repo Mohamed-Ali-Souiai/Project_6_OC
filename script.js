@@ -145,6 +145,7 @@ function makeCategory(category){
   /*************************************************************************************************/
   document.getElementById("prev" + idSection).onclick = function() {
     nbSlide = changeSlide(-1, nbSlide)
+    
     displayPictureSlide(idSection, picturesSlides, nbSlide);
   }
   document.getElementById("next" + idSection).onclick = function() {
@@ -158,7 +159,7 @@ function makeCategory(category){
 function changeSlide(direction, nbSlide) {
   nbSlide = nbSlide + direction;
   if (window.matchMedia("(max-width: 1280px)").matches) {
-    if (nbSlide <= 0) {
+    if (nbSlide < 0) {
       nbSlide = 4;
       }
     if (nbSlide > 4) {
