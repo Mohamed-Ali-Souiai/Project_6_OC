@@ -4,6 +4,7 @@ function loadResults(url, functionUrl) {
   fetch(url).then(function(response) {
       return response.json().then(
         function (data) {
+          console.log(data)
           return functionUrl(data);
         })
   })
@@ -13,7 +14,8 @@ function loadResults(url, functionUrl) {
 }
 
 //Best film request
-let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
+let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score"
+//let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
   bestFilmUrl = result.results[0].url;
@@ -71,20 +73,20 @@ function makeCategory(category){
   if (category != "Film les mieux notés"){
     genre = category;
     idSection = genre;
-    FilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score&genre=" + genre;
+    FilmUrlList =  `http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score&genre=${genre}`
     }else{
-      FilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
+      FilmUrlList =  `http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score`
       idSection = 'bestFilms'
     }
   let section = document.createElement("section");
   let nav = document.createElement("a");
-  const resultsImagesUrl = [];
-  const resultsLinksUrl = [];
-  const picturesSlides = [];
-  const urlList = []
+  let resultsImagesUrl = [];
+  let resultsLinksUrl = [];
+  let picturesSlides = [];
+  let urlList = []
   let nbSlide = 0;
   
-  //Make Title and block category
+  //create header nav
   nav.setAttribute("href", '#'+ idSection);
   nav.textContent = category;   
   document.getElementById("header_nav").appendChild(nav);
@@ -99,7 +101,7 @@ function makeCategory(category){
   h2.textContent = category; 
   document.getElementById(idSection + 'Title').appendChild(h2);
 
-  //Create slide block and arrows elements 
+  //Create the arrow elements
   let divSlider = document.createElement("div");
   divSlider.setAttribute("id", idSection + "List");
   divSlider.setAttribute("class", "list");
@@ -113,7 +115,7 @@ function makeCategory(category){
   spanControlNext.textContent = ">";
   divSlider.appendChild(spanControlPrev);
 
-  //Create and insert slides blocks and preview arrow into slide block  
+  //Create the sections
   for (let i=1; i<6; i++){
     let spanSlide = document.createElement("span");
     spanSlide.setAttribute("id", "slide" + i + idSection);
@@ -128,7 +130,7 @@ function makeCategory(category){
     urlList.push(FilmUrlList + "&page="+ i);
   }
   getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection);
- 
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   for (let i=1; i<5; i++){
     document.getElementById("slide"+ i + idSection).onclick = function() {
       if (nbSlide + (i-1) !== 7){
@@ -140,7 +142,7 @@ function makeCategory(category){
       } 
     }
   }
-  
+  /*************************************************************************************************/
   document.getElementById("prev" + idSection).onclick = function() {
     nbSlide = changeSlide(-1, nbSlide)
     displayPictureSlide(idSection, picturesSlides, nbSlide);
@@ -149,13 +151,14 @@ function makeCategory(category){
     nbSlide = changeSlide(+1, nbSlide)
     displayPictureSlide(idSection, picturesSlides, nbSlide);
   }
+  /*************************************************************************************************/ 
 }
 
 //Change slide Category
 function changeSlide(direction, nbSlide) {
   nbSlide = nbSlide + direction;
   if (window.matchMedia("(max-width: 1280px)").matches) {
-    if (nbSlide < 0) {
+    if (nbSlide <= 0) {
       nbSlide = 4;
       }
     if (nbSlide > 4) {
@@ -172,6 +175,7 @@ function changeSlide(direction, nbSlide) {
   return nbSlide;
 }
 
+//Demander des films de catégorie
 // Request category films
 async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection) { 
   try {
@@ -204,8 +208,10 @@ async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSl
   displayPictureSlide(idSection, picturesSlides, 0);
   
 }
-// Display category films
-function displayPictureSlide(idSection, picturesSlides, nbSlide){
+
+//nombre des filme afficher par category
+// Display category films 
+function displayPictureSlide(idSection, picturesSlides, nbSlide){ 
   for (let i=1; i<5; i++){
     if (nbSlide + (i - 1) !== 7){
     document.getElementById("slide"+ i + idSection).innerHTML = picturesSlides[nbSlide + (i - 1)];
@@ -218,9 +224,9 @@ function displayPictureSlide(idSection, picturesSlides, nbSlide){
 // Generate categories
 const categories = [
   "Film les mieux notés",
-  "Comedy",
+  "Biography",
   "Action",
-  "Animation"
+  "Adventure",
 ];
 
 for (let category of categories) {
