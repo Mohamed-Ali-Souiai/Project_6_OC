@@ -1,9 +1,7 @@
 # Project_6_OC
 
-```
-https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
+Développez une interface utilisateur pour une application web Python
 
-```
 ## Description
 
 Création d'une interface web utilisant l'API "OCMovies-API" permettant d'afficher les films.
@@ -15,4 +13,5 @@ Création d'une interface web utilisant l'API "OCMovies-API" permettant d'affich
 https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
 
 ```
+exécuter le fichier index pour lancer l'application
 
