@@ -1,3 +1,10 @@
+const categories = [
+  "Film les mieux notés",
+  "Biography",
+  "Action",
+  "Adventure",
+];
+
 /* Requests AJAX*/
 function loadResults(url, functionUrl) {
 
@@ -15,13 +22,12 @@ function loadResults(url, functionUrl) {
 
 //Best film request
 let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score"
-//let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
   bestFilmUrl = result.results[0].url;
   console.log('top')
   console.log(result) 
-  document.getElementById("bestFilmImage").innerHTML = `<img src=${result["results"][0]["image_url"]} + alt='Best Film Image' height='400' width='300'/>`;
+  document.getElementById("bestFilmImage").innerHTML = `<img src=${result["results"][0]["image_url"]} + alt='Best Film Image' height='500' width='325'/>`;
   document.getElementById("bestFilmTitle").innerHTML = result["results"][0]["title"];
   let description = document.getElementById("bestFilmDescription");
   fetch(result["results"][0]["url"])
@@ -66,14 +72,12 @@ window.onclick = function(event) {
 }
 
 // Categories
-function makeCategory(category){
-  let genre = '';
+function createCategory(category){
   let idSection;
   let FilmUrlList;
   if (category != "Film les mieux notés"){
-    genre = category;
-    idSection = genre;
-    FilmUrlList =  `http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score&genre=${genre}`
+    idSection = category;
+    FilmUrlList =  `http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score&genre=${category}`
     }else{
       FilmUrlList =  `http://localhost:8000/api/v1/titles/?page=1&sort_by=-imdb_score`
       idSection = 'bestFilms'
@@ -90,11 +94,11 @@ function makeCategory(category){
   nav.setAttribute("href", '#'+ idSection);
   nav.textContent = category;   
   document.getElementById("header_nav").appendChild(nav);
-  section.setAttribute("class", "category");
+  section.classList.add("category");
   section.setAttribute("id", idSection);
   document.getElementById("bodyPage").appendChild(section);
   let p = document.createElement("p");
-  p.setAttribute("class", "CategoryTitle");
+  p.classList.add("CategoryTitle");
   p.setAttribute("id", idSection + 'Title');
   section.appendChild(p);
   let h2 = document.createElement("h2");
@@ -129,31 +133,32 @@ function makeCategory(category){
   for (i=1; i<3; i++){
     urlList.push(FilmUrlList + "&page="+ i);
   }
-  getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection);
- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  fetchCategory(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection);
+
   for (let i=1; i<5; i++){
     document.getElementById("slide"+ i + idSection).onclick = function() {
       if (nbSlide + (i-1) !== 7){
         loadResults(resultsLinksUrl[nbSlide + (i-1)], FilmResultsModale);
-      modal.style.display = "block";
+        modal.style.display = "block";
       } else {
         loadResults(resultsLinksUrl[0], FilmResultsModale);
-      modal.style.display = "block";
+        modal.style.display = "block";
       } 
     }
   }
-  /*************************************************************************************************/
+  
   document.getElementById("prev" + idSection).onclick = function() {
     nbSlide = changeSlide(-1, nbSlide)
-    
     displayPictureSlide(idSection, picturesSlides, nbSlide);
   }
   document.getElementById("next" + idSection).onclick = function() {
     nbSlide = changeSlide(+1, nbSlide)
     displayPictureSlide(idSection, picturesSlides, nbSlide);
   }
-  /*************************************************************************************************/ 
+
 }
+
+
 
 //Change slide Category
 function changeSlide(direction, nbSlide) {
@@ -176,9 +181,8 @@ function changeSlide(direction, nbSlide) {
   return nbSlide;
 }
 
-//Demander des films de catégorie
 // Request category films
-async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection) { 
+async function fetchCategory(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection) { 
   try {
       let data = await Promise.all(
         urlList.map(
@@ -210,7 +214,6 @@ async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSl
   
 }
 
-//nombre des filme afficher par category
 // Display category films 
 function displayPictureSlide(idSection, picturesSlides, nbSlide){ 
   for (let i=1; i<5; i++){
@@ -222,14 +225,6 @@ function displayPictureSlide(idSection, picturesSlides, nbSlide){
   }
 }
 
-// Generate categories
-const categories = [
-  "Film les mieux notés",
-  "Biography",
-  "Action",
-  "Adventure",
-];
-
 for (let category of categories) {
-  makeCategory(category);
+  createCategory(category);
 }
